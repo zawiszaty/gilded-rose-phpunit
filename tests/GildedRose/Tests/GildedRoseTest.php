@@ -3,8 +3,9 @@
 namespace GildedRose\Tests;
 
 use GildedRose\GildedRose;
+use PHPUnit\Framework\TestCase;
 
-class GildedRoseTest extends \PHPUnit_Framework_TestCase
+class GildedRoseTest extends TestCase
 {
     public function test_aged_brie_type_before_sell_in_date_updates_normally()
     {
@@ -182,7 +183,7 @@ class GildedRoseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($item->quality, 8);
         $this->assertEquals($item->sellIn, -1);
     }
-    
+
     public function test_dexterity_vest_after_sell_in_date_quality_degrades_twice_as_fast()
     {
         $item = GildedRose::type('+5 Dexterity Vest', 10, -1);
@@ -191,25 +192,27 @@ class GildedRoseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($item->sellIn, -2);
     }
 
-    // public function test_conjured_before_sell_in_date_updates_normally()
-    // {
-    //     $item = GildedRose::type('Conjured', 10, 10);
-    //     $item->updateQuality();
-    //     $this->assertEquals($item->quality, 8);
-    //     $this->assertEquals($item->sellIn, 9);
-    // }
-    // public function test_conjured_does_not_degrade_passed_zero()
-    // {
-    //     $item = GildedRose::type('Conjured', 0, 10);
-    //     $item->updateQuality();
-    //     $this->assertEquals($item->quality, 0);
-    //     $this->assertEquals($item->sellIn, 9);
-    // }
-    // public function test_conjured_after_sell_in_date_degrades_twice_as_fast()
-    // {
-    //     $item = GildedRose::type('Conjured', 10, 0);
-    //     $item->updateQuality();
-    //     $this->assertEquals($item->quality, 6);
-    //     $this->assertEquals($item->sellIn, -1);
-    // }
+    public function test_conjured_before_sell_in_date_updates_normally()
+    {
+        $item = GildedRose::type('Conjured', 10, 10);
+        $item->updateQuality();
+        $this->assertEquals($item->quality, 8);
+        $this->assertEquals($item->sellIn, 9);
+    }
+
+    public function test_conjured_does_not_degrade_passed_zero()
+    {
+        $item = GildedRose::type('Conjured', 0, 10);
+        $item->updateQuality();
+        $this->assertEquals($item->quality, 0);
+        $this->assertEquals($item->sellIn, 9);
+    }
+
+    public function test_conjured_after_sell_in_date_degrades_twice_as_fast()
+    {
+        $item = GildedRose::type('Conjured', 10, 0);
+        $item->updateQuality();
+        $this->assertEquals($item->quality, 6);
+        $this->assertEquals($item->sellIn, -1);
+    }
 }
